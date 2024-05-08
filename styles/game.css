@@ -1,0 +1,13 @@
+#gameback{
+    background-color: aliceblue;
+    padding: 15px;
+}
+
+#cutsceneback{
+    background-color: brown;
+}
+
+#titleback{
+    background-color: black;
+    color: white;
+}
