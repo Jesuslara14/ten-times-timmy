@@ -1,0 +1,27 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+
+body{
+    width: 100vw;
+}
+
+#office{
+    background-image: url("../public/office.jpg");
+    height: 100vh;
+}
+
+.sideButton{
+    width: fit-content;
+    height: 100vh;
+    padding: 15px;
+}
+
+.left{
+    float: left;
+}
+
+.right{
+    float: right;
+}
