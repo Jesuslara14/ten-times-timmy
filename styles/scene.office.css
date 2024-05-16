@@ -41,7 +41,7 @@ body{
 
 .officeView{
     scroll-snap-align: center;
-    min-width: inherit;
+    min-width: 90vh;
     min-height: 100vh;
 }
 
