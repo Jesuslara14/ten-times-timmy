@@ -1,5 +1,5 @@
 :root {--loadIn: ease-in 3s fadeIn;}
-:root {--loadIn2: ease-in 6s fadeIn;}
+:root {--loadIn2: ease-in 7s fadeIn;}
 
 @keyframes fadeIn {
     0% {
