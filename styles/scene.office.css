@@ -12,8 +12,14 @@ body{
     height: 100vh;
 }
 
+#officeView{
+    width: 90vw;
+    height: 100vh;
+    background-color: bisque;
+}
+
 .sideButton{
-    width: fit-content;
+    width: 5vw;
     height: 100vh;
     padding: 15px;
 }
