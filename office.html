@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/scene.office.css">
+    <link rel="stylesheet" href="styles/global.css">
+    <script src="src/office/main.js" defer></script>
     <title>Document</title>
 </head>
 <body>
@@ -12,11 +14,14 @@
         <h1></h1>
     </div>
     <div id="office">
-        <button class="sideButton left"><<</button>
-        <div id="officeView">
-            
+        <button id="swipeLeft" class="sideButton"><<</button>
+        <div id="officeViewContainer">
+            <div class="officeView" id="officeOne"></div>
+            <div class="officeView" id="officeTwo"></div>
+            <div class="officeView" id="officeThree"></div>
+            <div class="officeView" id="officeFour"></div>
         </div>
-        <button class="sideButton right">>></button>
+        <button id="swipeRight" class="sideButton">>></button>
     </div>
 </body>
 </html>

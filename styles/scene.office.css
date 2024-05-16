@@ -8,14 +8,41 @@ body{
 }
 
 #office{
-    background-image: url("../public/office.jpg");
+    background-color: black;
     height: 100vh;
+    display: flex;
+    flex-direction: row;
 }
 
-#officeView{
+#officeViewContainer{
     width: 90vw;
     height: 100vh;
-    background-color: bisque;
+    display: flex;
+    flex-flow: row;
+    overflow: auto;
+    scroll-snap-type: x mandatory;
+}
+
+#officeOne{
+    background-color: red;
+}
+
+#officeTwo{
+    background-color: blue;
+}
+
+#officeThree{
+    background-color: green;
+}
+
+#officeFour{
+    background-color: yellow;
+}
+
+.officeView{
+    scroll-snap-align: center;
+    min-width: inherit;
+    min-height: 100vh;
 }
 
 .sideButton{
