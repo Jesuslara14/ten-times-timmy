@@ -53,41 +53,52 @@ body{
 }
 
 
+/* --------------- Start Button Styling --------------- */
 
-#start {
+
+  #start {
     animation: var(--loadIn3);
-
+    
     position: absolute;
-    top: 75%;
+    top: 70%;
     left: 26%;
     color: rgb(130, 130, 130);
     text-decoration: none;
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: "Road Rage";
+    font-size: 35px;
+    background-color: rgba(0, 0, 0, 0);
+    border-color: rgba(0, 0, 0, 0);
 
-    transition: 1.5s;
-}
+    transition: 1.25s;
+  }
 
-#start:hover {
-    top: 74.5%;
-    left: 25.5%;
 
-    color: white; text-shadow: 0px 0px 28px white;
-    font-size: larger;
-}
+
+  #start:hover {
+    transform: translateX(-15%) translateY(-12%);
+
+    cursor: pointer;
+    color: white;
+    text-shadow: 0px 0px 28px white;
+    font-size: 50px;
+  }
+/* ---------------------------------------------------- */
+
+
+
 
 #reset {
     animation: var(--loadIn3);
 
+    font-family: "Creepster";
     position: absolute;
     top: 95%;
     left: 96%;
 
     /* button styling */
     color:  rgb(165, 42, 42);
-    background-color: rgba(14, 14, 14, 0.8);
     text-decoration: none;
-    padding: 5px;
-    border-radius: 8px;
+
 
     transition: 1.25s;
 }
@@ -114,5 +125,5 @@ body{
   width: 50%;
   position: absolute;
   top: 15%;
-  left: 4%;
+  left: 5%;
 }
