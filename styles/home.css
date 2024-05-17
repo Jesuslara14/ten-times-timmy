@@ -1,5 +1,129 @@
+:root {--loadIn: ease-in 3s fadeIn;}
+:root {--loadIn2: ease-in 6s fadeIn2;}
+:root {--loadIn3: ease-in 8s fadeIn3;}
+
+@keyframes fadeIn {
+    0% {
+      filter: opacity(0);
+    }
+    40% {
+        filter:opacity(0);
+    }
+    100% {
+      filter: opacity(100);
+    }
+  }
+
+@keyframes fadeIn2 {
+    0% {
+      filter: opacity(0);
+    }
+    60% {
+        filter:opacity(0);
+    }
+    100% {
+      filter: opacity(50%);
+    }
+  }
+
+@keyframes fadeIn3 {
+    0% {
+      filter: opacity(0);
+    }
+    75% {
+        filter:opacity(0);
+    }
+    100% {
+      filter: opacity(100);
+    }
+  }
+
+
 body{
-    padding: 50px;
+  padding:0;
     background-color: black;
     color: white;
+    overflow-y: hidden;
+}
+
+#gameback {
+   padding:0;
+    animation: var(--loadIn);
+    height:100%;
+}
+
+
+/* --------------- Start Button Styling --------------- */
+
+
+  #start {
+    animation: var(--loadIn3);
+    
+    position: absolute;
+    top: 70%;
+    left: 26%;
+    color: rgb(130, 130, 130);
+    text-decoration: none;
+    font-family: "Road Rage";
+    font-size: 35px;
+    background-color: rgba(0, 0, 0, 0);
+    border-color: rgba(0, 0, 0, 0);
+
+    transition: 1.25s;
+  }
+
+
+
+  #start:hover {
+    transform: translateX(-15%) translateY(-12%);
+
+    cursor: pointer;
+    color: white;
+    text-shadow: 0px 0px 28px white;
+    font-size: 50px;
+  }
+/* ---------------------------------------------------- */
+
+
+
+
+#reset {
+    animation: var(--loadIn3);
+
+    font-family: "Creepster";
+    position: absolute;
+    top: 95%;
+    left: 96%;
+
+    /* button styling */
+    color:  rgb(165, 42, 42);
+    text-decoration: none;
+
+
+    transition: 1.25s;
+}
+
+#reset:hover {
+    top: 94.5%;
+    left: 95.5%;
+    text-shadow: 0px 0px 25px red;
+    font-size: larger;
+}
+
+
+
+
+#background {
+    width:100%;
+    margin-top: -3%;
+}
+
+#title {
+  animation: var(--loadIn2);
+  filter: opacity(50%);
+
+  width: 50%;
+  position: absolute;
+  top: 15%;
+  left: 5%;
 }
