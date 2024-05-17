@@ -1,5 +1,6 @@
 :root {--loadIn: ease-in 3s fadeIn;}
-:root {--loadIn2: ease-in 7s fadeIn;}
+:root {--loadIn2: ease-in 6s fadeIn2;}
+:root {--loadIn3: ease-in 8s fadeIn3;}
 
 @keyframes fadeIn {
     0% {
@@ -17,7 +18,19 @@
     0% {
       filter: opacity(0);
     }
-    50% {
+    60% {
+        filter:opacity(0);
+    }
+    100% {
+      filter: opacity(50%);
+    }
+  }
+
+@keyframes fadeIn3 {
+    0% {
+      filter: opacity(0);
+    }
+    75% {
         filter:opacity(0);
     }
     100% {
@@ -27,13 +40,14 @@
 
 
 body{
-    padding:0;
+  padding:0;
     background-color: black;
     color: white;
     overflow-y: hidden;
 }
 
 #gameback {
+   padding:0;
     animation: var(--loadIn);
     height:100%;
 }
@@ -41,7 +55,7 @@ body{
 
 
 #start {
-    animation: var(--loadIn2);
+    animation: var(--loadIn3);
 
     position: absolute;
     top: 75%;
@@ -62,7 +76,7 @@ body{
 }
 
 #reset {
-    animation: var(--loadIn2);
+    animation: var(--loadIn3);
 
     position: absolute;
     top: 95%;
@@ -85,7 +99,20 @@ body{
     font-size: larger;
 }
 
+
+
+
 #img {
     width:100%;
     margin-top: -3%;
+}
+
+#title {
+  animation: var(--loadIn2);
+  filter: opacity(50%);
+
+  width: 50%;
+  position: absolute;
+  top: 15%;
+  left: 4%;
 }
