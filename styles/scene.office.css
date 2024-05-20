@@ -5,21 +5,23 @@
 
 body{
     width: 100vw;
+    overscroll-behavior: none;
 }
 
 #office{
     background-color: black;
+
     height: 100vh;
     display: flex;
     flex-direction: row;
 }
 
 #officeViewContainer{
-    width: 90vw;
     height: 100vh;
-    display: flex;
-    flex-flow: row;
-    overflow: auto;
+    display: grid;
+    grid-template-columns: 100vw 100vw 100vw 100vw;
+    overflow-y: hidden;
+    scrollbar-width: none;
     scroll-snap-type: x mandatory;
 }
 
