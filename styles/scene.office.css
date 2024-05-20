@@ -51,6 +51,13 @@ body{
     width: 5vw;
     height: 100vh;
     padding: 15px;
+
+    border-color: rgb(151, 151, 151);
+    border-radius: 0;
+
+    color: white;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    background-color: rgb(50, 50, 50);
 }
 
 .left{
