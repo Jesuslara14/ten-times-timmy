@@ -1,6 +1,7 @@
 :root {--loadIn: ease-in 3s fadeIn;}
 :root {--loadIn2: ease-in 6s fadeIn2;}
 :root {--loadIn3: ease-in 8s fadeIn3;}
+:root {--loadIn4: ease-in 8s fadeIn4;}
 
 @keyframes fadeIn {
     0% {
@@ -38,6 +39,18 @@
     }
   }
 
+@keyframes fadeIn4 {
+  0% {
+    filter: opacity(0);
+  }
+  75% {
+      filter:opacity(0);
+  }
+  100% {
+    filter: opacity(45%);
+  }
+}
+
 
 body{
   padding:0;
@@ -57,17 +70,17 @@ body{
 
 
   #start {
-    animation: var(--loadIn3);
-    
+    animation: var(--loadIn4);
+
     position: absolute;
     top: 70%;
     left: 26%;
-    color: rgb(130, 130, 130);
+    color: white;
     text-decoration: none;
     font-family: "Road Rage";
     font-size: 35px;
-    background-color: rgba(0, 0, 0, 0);
-    border-color: rgba(0, 0, 0, 0);
+
+    filter: opacity(45%);
 
     transition: 1.25s;
   }
@@ -79,8 +92,9 @@ body{
 
     cursor: pointer;
     color: white;
-    text-shadow: 0px 0px 28px white;
     font-size: 50px;
+
+    filter: opacity(100%);
   }
 /* ---------------------------------------------------- */
 
@@ -96,7 +110,7 @@ body{
     left: 96%;
 
     /* button styling */
-    color:  rgb(165, 42, 42);
+    color: rgb(165, 42, 42);
     text-decoration: none;
 
 
