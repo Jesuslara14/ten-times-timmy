@@ -6,14 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/home.css">
     <title>Ten Times at Timmy's</title>
-    <script src="src/main.js" defer></script>
+    <script src="src/game/main.js" defer></script>
+    <script src="src/office/main.js" defer></script>
+    <script src="src/title/main.js" defer></script>
 </head>
-<body>    
-    <button onclick="changeBackdrop('game.html')">Game</button>
-    <button onclick="changeBackdrop('cutscene.html')">Cut</button>
-    <button onclick="changeBackdrop('titlescreen.html')">Title</button>
-    <div>
-        <iframe src="game.html" frameborder="0" width="1024" height="768" id="content-frame"></iframe>
+<body>
+    <div class="buttonContainer">
+        <button onclick="changeBackdrop('game.html')">Game</button>
+        <button onclick="changeBackdrop('cutscene.html')">Cut</button>
+        <button onclick="changeBackdrop('titlescreen.html')">Title</button>
+    </div>
+
+    <div class="gameContainer">
+        <iframe class="gameWindow" src="game.html" frameborder="0" width="1024" height="768" id="content-frame"></iframe>
     </div>
 </body>
 </html>
