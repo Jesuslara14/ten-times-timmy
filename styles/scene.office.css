@@ -17,6 +17,8 @@ body{
 }
 
 #officeViewContainer{
+    padding: none;
+    margin: none;
     height: 100vh;
     display: grid;
     grid-template-columns: 100vw 100vw 100vw 100vw;
@@ -25,26 +27,19 @@ body{
     scroll-snap-type: x mandatory;
 }
 
-#officeOne{
-    background-color: red;
-}
-
-#officeTwo{
-    background-color: blue;
-}
-
-#officeThree{
-    background-color: green;
-}
-
-#officeFour{
-    background-color: yellow;
-}
-
 .officeView{
+    display: flex;
     scroll-snap-align: center;
     min-width: 90vh;
     min-height: 100vh;
+    width: 100vw;
+    padding: 0%;
+}
+
+.officeBack {
+    align-self: center;
+    justify-self: center;
+    width: 100vw;
 }
 
 .sideButton{
@@ -66,4 +61,24 @@ body{
 
 .right{
     float: right;
+}
+
+
+
+
+.doorOpen {
+    position: relative;
+    right: 80%;
+    top: 3%;
+    height:80%;
+}
+
+#door1 {
+    transform: rotateY(180deg);
+    right:88%;
+}
+
+#Wall4, #Wall2 {
+    height: 150%;
+    right: 1%;
 }
