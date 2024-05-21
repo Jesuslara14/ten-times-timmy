@@ -7,35 +7,204 @@
     <title>Cameras</title>
 
     <style>
-        * {
+        body {
             background-color: black;
+        }
+
+        .videos {
+            object-fit: cover;
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+
+            z-index: -1;
+            visibility: hidden;
+        }
+
+
+        #cameras {
+            height: fit-content;
+        }
+
+        #map {
+            width: min-content;
+            /* background-color: blue; */
+
+            float: right;
+            margin-top: 20%;
         }
 
         .cams {
             background-color: whitesmoke;
+            z-index: 3;
+
+            position: absolute;
+        }
+
+        #party {
+            top: 50%;
+            left: 75%;
+        }
+
+        #shrek {
+            top: 75%;
+            left: 88%;
+        }
+
+        #hall1 {
+            top: 64%;
+            left: 80%;
+        }
+
+        #hall2 {
+            top: 75%;
+            left: 74%;
+        }
+
+        #vent1 {
+            top: 85%;
+            left: 73%;
+        }
+
+        #vent2 {
+            top: 85%;
+            left: 83%;
+        }
+
+        .animatronic {
+            z-index: 2;
+            color: red;
+
+            position: absolute;
+
+            top: 30%;
+            left: 25%;
         }
     </style>
 </head>
 
 <body>
     <div id="background">
-        <div id="map">
-            <img src="./You.png" alt="map">
-            <div id="cameras">
-                <button class="cams" id="party" onclick="Party()">Party Room</button>
-                <button class="cams" id="shrek">Shrek's Swamp</button>
-                <button class="cams" id="hall1">Hallway 1</button>
-                <button class="cams" id="hall2">Hallway 2</button>
-                <button class="cams" id="cam1">Camera 1</button>
-                <button class="cams" id="cam2">Camera 2</button>
-            </div>
+        <div>
+        <video autoplay muted loop poster="/public/partyroom.png" id="partyVid" class="videos">
+            <source src="/public/partyroom.mp4" type="video/mp4">
+        </video>
+
+        <video autoplay muted loop poster="/public/shrek.png" id="shrekVid" class="videos">
+            <source src="/public/shrek.mp4" type="video/mp4">
+        </video>
+        <video autoplay muted loop poster="/public/hall1.png" id="hall1Vid" class="videos">
+            <source src="/public/hall1.mp4" type="video/mp4">
+        </video>
+        <video autoplay muted loop poster="/public/hall2.png" id="hall2Vid" class="videos">
+            <source src="/public/hall2.mp4" type="video/mp4">
+        </video>
+        <video autoplay muted loop poster="/public/vent1.png" id="vent1Vid" class="videos">
+            <source src="/public/vent1.mp4" type="video/mp4">
+        </video>
+        <video autoplay muted loop poster="/public/vent2.png" id="vent2Vid" class="videos">
+            <source src="/public/vent2.mp4" type="video/mp4">
+        </video>
+    </div>
+
+
+        <div id="rockA" class="animatronic">
+            <img src="/public/rock.png" alt="The Rock">
+        </div>
+        <div id="shrekA" class="animatronic">
+            <img src="/public/sjrek.jpg" alt="Shrek">
+        </div>
+        <!-- <div id="timmyA" class="animatronic">
+            <img src="/public/rock.png" alt="">
+        </div> -->
+        <!-- <div id="amongUsA" class="animatronic">
+            <img src="/public/amogn.png" alt="amog us IMPOSTERC NOOOOOO">
+        </div> -->
+
+
+        <div id="cameras">
+            <button class="cams" id="party" onclick="Party()">Party Room</button>
+            <button class="cams" id="shrek" onclick="Shrek()">Shrek's Swamp</button>
+            <button class="cams" id="hall1" onclick="Hall1()">Hallway 1</button>
+            <button class="cams" id="hall2" onclick="Hall2()">Hallway 2</button>
+            <button class="cams" id="vent1" onclick="Vent1()">Vent 1</button>
+            <button class="cams" id="vent2" onclick="Vent2()">Vent 2</button>
+            <img id="map" src="/public/You.png" alt="map">
         </div>
 
+        <audio controls autoplay>
+            <source src="static.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
     </div>
 
     <script>
-        function Party(){
-            document.getElementById("background").style.backgroundImage = ""
+        function Party() {
+            document.getElementById("partyVid").style.visibility = "visible";
+
+
+            document.getElementById("shrekVid").style.visibility = "hidden";
+            document.getElementById("hall1Vid").style.visibility = "hidden";
+            document.getElementById("hall2Vid").style.visibility = "hidden";
+            document.getElementById("vent1Vid").style.visibility = "hidden";
+            document.getElementById("vent2Vid").style.visibility = "hidden";
+        }
+
+        function Shrek() {
+            document.getElementById("shrekVid").style.visibility = "visible";
+
+
+            document.getElementById("partyVid").style.visibility = "hidden";
+            document.getElementById("hall1Vid").style.visibility = "hidden";
+            document.getElementById("hall2Vid").style.visibility = "hidden";
+            document.getElementById("vent1Vid").style.visibility = "hidden";
+            document.getElementById("vent2Vid").style.visibility = "hidden";
+        }
+
+        function Hall1() {
+            document.getElementById("hall1Vid").style.visibility = "visible";
+
+
+            document.getElementById("partyVid").style.visibility = "hidden";
+            document.getElementById("shrekVid").style.visibility = "hidden";
+            document.getElementById("hall2Vid").style.visibility = "hidden";
+            document.getElementById("vent1Vid").style.visibility = "hidden";
+            document.getElementById("vent2Vid").style.visibility = "hidden";
+        }
+
+        function Hall2() {
+            document.getElementById("hall2Vid").style.visibility = "visible";
+
+
+            document.getElementById("partyVid").style.visibility = "hidden";
+            document.getElementById("shrekVid").style.visibility = "hidden";
+            document.getElementById("hall1Vid").style.visibility = "hidden";
+            document.getElementById("vent1Vid").style.visibility = "hidden";
+            document.getElementById("vent2Vid").style.visibility = "hidden";
+        }
+
+        function Vent1() {
+            document.getElementById("vent1Vid").style.visibility = "visible";
+
+
+            document.getElementById("partyVid").style.visibility = "hidden";
+            document.getElementById("shrekVid").style.visibility = "hidden";
+            document.getElementById("hall1Vid").style.visibility = "hidden";
+            document.getElementById("hall2Vid").style.visibility = "hidden";
+            document.getElementById("vent2Vid").style.visibility = "hidden";
+        }
+
+        function Vent2() {
+            document.getElementById("vent2Vid").style.visibility = "visible";
+
+
+            document.getElementById("partyVid").style.visibility = "hidden";
+            document.getElementById("shrekVid").style.visibility = "hidden";
+            document.getElementById("hall1Vid").style.visibility = "hidden";
+            document.getElementById("hall2Vid").style.visibility = "hidden";
+            document.getElementById("vent1Vid").style.visibility = "hidden";
         }
     </script>
 </body>

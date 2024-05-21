@@ -1,27 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/scene.office.css">
-    <link rel="stylesheet" href="styles/global.css">
-    <script src="src/office/main.js" defer></script>
-    <title>Document</title>
-</head>
-<body>
-    <div>
-        <h1></h1>
-    </div>
-    <div id="office">
-        <button id="swipeLeft" class="sideButton"><<</button>
-        <div id="officeViewContainer">
-            <div class="officeView" id="officeOne"></div>
-            <div class="officeView" id="officeTwo"></div>
-            <div class="officeView" id="officeThree"></div>
-            <div class="officeView" id="officeFour"></div>
-        </div>
-        <button id="swipeRight" class="sideButton">>></button>
-    </div>
-</body>
-</html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="styles/scene.office.css">
+            <link rel="stylesheet" href="styles/global.css">
+            <script src="src/office/main.js" defer></script>
+            <title>Office</title>
+        </head>
+        <body>
+            <div>
+                <h1></h1>
+            </div>
+            <div id="office">
+                <button id="swipeLeft" class="sideButton"><<</button>
+                <div id="officeViewContainer">
+                    <div class="officeView" id="officeOne">
+                        <img class="officeBack" id="Wall4" src="public/Wall4.png">
+                        <img class="doorOpen" id="door1" src="public/openDoor.png">
+                    </div>
+
+                    <div class="officeView" id="officeTwo">
+                        <img class="officeBack" src="public/Wall1.png">
+                    </div>
+
+                    <div class="officeView" id="officeThree">
+                        <img class="officeBack" id="Wall2" src="public/Wall2.png">
+                        <img class="doorOpen" id="door2" src="public/openDoor.png">
+                    </div>
+
+                    <div class="officeView" id="officeFour">
+                        <img class="officeBack" src="public/Wall3.png">
+                    </div>
+                </div>
+
+                
+                <button id="swipeRight" class="sideButton">>></button>
+                
+            </div>
+        </body>
+    </html>
