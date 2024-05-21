@@ -8,16 +8,25 @@ for (let i = 0; i < swipeButtons.length; i++) {
 
 function swipe(event) {
     const buttonId = event.target.id;
-    const containerWidth = officeViewContainer.offsetWidth;
+    const itemWidth = officeViewContainer.firstElementChild.offsetWidth; // Get the width of a single item
     let currentScrollPosition = officeViewContainer.scrollLeft;
 
     // Determine swipe direction
     if (buttonId === 'swipeLeft') {
-        // Move to the previous panel
-        currentScrollPosition -= containerWidth;
+        // Move to the previous item
+        currentScrollPosition -= itemWidth;
+        // Ensure we don't scroll past the first item
+        if (currentScrollPosition < 0) {
+            currentScrollPosition = 0;
+        }
     } else if (buttonId === 'swipeRight') {
-        // Move to the next panel
-        currentScrollPosition += containerWidth;
+        // Move to the next item
+        currentScrollPosition += itemWidth;
+        // Ensure we don't scroll past the last item
+        const maxScrollLeft = officeViewContainer.scrollWidth - officeViewContainer.clientWidth;
+        if (currentScrollPosition > maxScrollLeft) {
+            currentScrollPosition = maxScrollLeft;
+        }
     }
 
     // Scroll to the new position smoothly
