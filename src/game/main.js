@@ -20,13 +20,18 @@ class PathNode {
 }
 
 class Ai {
-    constructor(character, nodes){
+    constructor(character, nodes, attack){
         this.character = character;
         this.nodes = nodes;
+        this.attack = attack;
     }
 
     set kill(kill){
         this.killGame = kill;
+    }
+
+    set attackCon(control){
+        this.attackControl = control;
     }
 
     run(level){
@@ -41,7 +46,13 @@ class Ai {
     
     cycle(){
         if(this.currentNode.nodeType == 'a'){
-
+            let shouldAttack = !this.attackControl();
+            if (shouldAttack){
+                this.jumpscare;
+            }else{
+                this.currentNode.clearNode();
+                this.currentNode = this.nodes[0];
+            }
         } else {
             
         }
@@ -52,6 +63,10 @@ class Ai {
         clearTimeout(this.tracker);
     }
 
+    findNode(nodeId){
+        return this.nodes.find(e => e.nodeId == nodeId);
+    }
+
     jumpscare(){
         console.log('Jumpscare logic ran');
         this.killGame();
@@ -59,23 +74,46 @@ class Ai {
 }
 
 class Game {
-    constructor(AI){
-        this.Ai = AI;
+    constructor(ai){
+        this.ai = ai;
+        this.emergencySounding = false;
+        this.doorClosed = false;
     }
 
     start(){
         console.log('game started');
-        for(let i in this.Ai){
-            this.Ai[i].kill = this.kill;
-            this.Ai[i].run(2);
+        for(let i in this.ai){
+            this.ai[i].kill = this.kill;
+            this.ai[i].attackCon = this.ai[i].attack == 'd' ? this.checkDoor : this.checkEmergency;
+            this.ai[i].run(2);
         }
+        console.log(this.ai);
     }
 
     kill(){
-        for(let i in this.Ai){
-            this.Ai[i].killAi();
+        for(let i in this.ai){
+            this.ai[i].killAi();
         }
         console.log('game ended');
+    }
+
+    checkEmergency(){
+        return this.emergencySounding;
+    }
+
+    checkDoor(){
+        return this.doorClosed;
+    }
+
+    toggleEmergencyMeeting(){
+        if(this.emergencySounding == false){
+            this.emergencySounding = true;
+            setTimeout(() => this.emergencySounding = false, 10000);
+        }
+    }
+
+    toggleDoor(){
+        this.doorClosed = !this.doorClosed;
     }
 }
 
@@ -97,7 +135,6 @@ function generateDelay(level){
 
 document.getElementById('start').addEventListener('click', startGame);
 
-
 /* AI Creation */
 
 let nodeStrings = [
@@ -109,17 +146,17 @@ let nodeStrings = [
         {id: 'tisr',type: 'i',position: 'tsr',adjacent: ['tih2'],image: 'timmy.png'},
         {id: 'tao',type: 'a',position: 'to',adjacent: [],image: 'timmy.png'}
     ]
-]
+];
 
-let nodeList = []
+let nodeList = [];
 
 for(let i in nodeStrings){
     let nodeSet = [];
     for(let j = 1; j < nodeStrings[i].length; j++){
-        let tempNode = new PathNode(nodeStrings[i][0], nodeStrings[i][j].id, nodeStrings[i][j].type, nodeStrings[i][j].position, nodeStrings[i][j].adjacent, nodeStrings[i][j].image)
-        nodeSet.push(tempNode)
+        let tempNode = new PathNode(nodeStrings[i][0], nodeStrings[i][j].id, nodeStrings[i][j].type, nodeStrings[i][j].position, nodeStrings[i][j].adjacent, nodeStrings[i][j].image);
+        nodeSet.push(tempNode);
     }
-    nodeList.push(nodeSet)
+    nodeList.push(nodeSet);
 }
 
-let timmy = new Ai('timmy', nodeList[0])
+let timmy = new Ai('timmy', nodeList[0], 'd');
