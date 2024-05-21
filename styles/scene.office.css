@@ -78,7 +78,21 @@ body{
     right:88%;
 }
 
-#Wall4, #Wall2 {
+#Wall4, #Wall2, #Wall3 {
     height: 150%;
     right: 1%;
+}
+
+
+.button {
+    height: 10%;
+    position: relative;
+    right: 50%;
+    top: 30%;
+
+    cursor: pointer;
+}
+
+.button:active {
+    background: url("public/button_pressed.png");
 }
