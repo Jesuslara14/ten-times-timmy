@@ -99,13 +99,13 @@ class Game {
         this.ai = ai;
         this.emergencySounding = false;
         this.leftDoorClosed = false;
-        this.righDoorClosed = false;
+        this.rightDoorClosed = false;
     }
 
     start(){
         console.log('game started');
         for(let i in this.ai){
-            this.ai[i].kill = this.kill;
+            this.ai[i].kill = this.kill.bind(this);
             this.ai[i].run(2);
             switch(this.ai[i].attack){
                 case 'ld':
@@ -139,7 +139,7 @@ class Game {
     }
 
     checkRightDoor(){
-        return this.righDoorClosed;
+        return this.rightDoorClosed;
     }
 
     toggleEmergencyMeeting(){
@@ -161,7 +161,7 @@ class Game {
 /* Utility Functions */
 
 function startGame(){
-    const game = new Game([timmy, rock]);
+    const game = new Game([timmy]);
     game.start();
     document.getElementById('killGame').addEventListener('click', game.kill.bind(game));
 }
@@ -180,19 +180,19 @@ document.getElementById('start').addEventListener('click', startGame);
 
 let nodeStrings = [
     [
-        "timmy",
-        {id: 'tspr',type: 's',position: 'tpr',adjacent: [{nodeId: 'tih1',weight: 1}],image: 'timmy.png'},
-        {id: 'tih1',type: 'i',position: 'th1',adjacent: [{nodeId: 'tih2',weight: 0.7}, {nodeId: 'tisr',weight: 0.2}, {nodeId: 'tspr',weight: 0.1}],image: 'timmy.png'},
-        {id: 'tih2',type: 'i',position: 'th2',adjacent: [{nodeId: 'tald',weight: 0.5}, {nodeId: 'tisr',weight: 0.4}, {nodeId: 'tih1',weight: 0.1}],image: 'timmy.png'},
-        {id: 'tisr',type: 'i',position: 'tsr',adjacent: [{nodeId: 'tih2',weight: 0.4}],image: 'timmy.png'},
-        {id: 'tald',type: 'a',position: 'tld',adjacent: [],image: 'timmy.png'}
+        "rock",
+        {id: 'rspr',type: 's',position: 'rpr',adjacent: [{nodeId: 'rih1',weight: 1}],image: 'rock.png'},
+        {id: 'rih1',type: 'i',position: 'rh1',adjacent: [{nodeId: 'rih2',weight: 0.7}, {nodeId: 'risr',weight: 0.2}, {nodeId: 'rspr',weight: 0.1}],image: 'rock.png'},
+        {id: 'rih2',type: 'i',position: 'rh2',adjacent: [{nodeId: 'rald',weight: 0.5}, {nodeId: 'risr',weight: 0.4}, {nodeId: 'rih1',weight: 0.1}],image: 'rock.png'},
+        {id: 'risr',type: 'i',position: 'rsr',adjacent: [{nodeId: 'rih2',weight: 0.4}],image: 'rock.png'},
+        {id: 'rald',type: 'a',position: 'rld',adjacent: [],image: 'rock.png'}
     ],
     [
-        "rock",
-        { id: 'rspr', type: 's', position: 'rpr', adjacent: [{ nodeId: 'rih1', weight: 1 }], image: 'rock.png' },
-        { id: 'rih1', type: 'i', position: 'rh1', adjacent: [{ nodeId: 'rih2', weight: 0.75 }, {nodeId: 'rspr', weight: 0.25}], image: 'rock.png' },
-        { id: 'rih2', type: 'i', position: 'rh2', adjacent: [{ nodeId: 'rard', weight: 1 }], image: 'rock.png' },
-        { id: 'rard', type: 'a', position: 'rrd', adjacent: [], image: 'rock.png' }
+        "timmy",
+        { id: 'tspr', type: 's', position: 'tpr', adjacent: [{ nodeId: 'tih1', weight: 1 }], image: 'timmy.png' },
+        { id: 'tih1', type: 'i', position: 'th1', adjacent: [{ nodeId: 'tih2', weight: 1 }], image: 'timmy.png' },
+        { id: 'tih2', type: 'i', position: 'th2', adjacent: [{ nodeId: 'tard', weight: 1 }], image: 'timmy.png' },
+        { id: 'tard', type: 'a', position: 'trd', adjacent: [], image: 'timmy.png' }
     ]   
 ];
 
@@ -207,5 +207,5 @@ for(let i in nodeStrings){
     nodeList.push(nodeSet);
 }
 
-let timmy = new Ai('timmy', nodeList[0], 'ld');
-let rock = new Ai('rock', nodeList[1], 'rd')
+let rock = new Ai('rock', nodeList[0], 'ld');
+let timmy = new Ai('timmy', nodeList[1], 'rd');
