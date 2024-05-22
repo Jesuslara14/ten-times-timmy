@@ -37,6 +37,7 @@ class Ai {
     run(level){
         this.activityLevel = level;
         this.currentNode = this.nodes[0];
+        this.currentNode.activateNode();
         this.newCycle();
     }
 
@@ -46,15 +47,20 @@ class Ai {
     
     cycle(){
         if(this.currentNode.nodeType == 'a'){
-            let shouldAttack = !this.attackControl();
-            if (shouldAttack){
-                this.jumpscare;
+            let shouldNotAttack = this.attackControl();
+
+            console.log(shouldNotAttack)
+            if (!shouldNotAttack){
+                return this.jumpscare();
             }else{
                 this.currentNode.clearNode();
                 this.currentNode = this.nodes[0];
+                this.currentNode.activateNode();
             }
         } else {
-            
+            this.currentNode.clearNode();
+            this.currentNode = this.getNextNode();
+            this.currentNode.activateNode();
         }
         this.newCycle();
     }
@@ -63,12 +69,27 @@ class Ai {
         clearTimeout(this.tracker);
     }
 
-    findNode(nodeId){
-        return this.nodes.find(e => e.nodeId == nodeId);
+    getNextNode(){
+        let randomNum = Math.random();
+        let cumulativeWeight = 0;
+        let nodeId = "";
+
+        for (let node of this.currentNode.adjacentNodes) {
+            cumulativeWeight += node.weight;
+            if (randomNum < cumulativeWeight) {
+                nodeId = node.nodeId;
+                break;
+            }
+        }
+
+        if (nodeId == ""){
+            nodeId = this.currentNode.adjacentNodes[this.currentNode.adjacentNodes.length - 1].nodeId;
+        }
+        
+        return this.nodes.find((node) => node.nodeId == nodeId);
     }
 
     jumpscare(){
-        console.log('Jumpscare logic ran');
         this.killGame();
     }
 }
@@ -77,17 +98,29 @@ class Game {
     constructor(ai){
         this.ai = ai;
         this.emergencySounding = false;
-        this.doorClosed = false;
+        this.leftDoorClosed = false;
+        this.righDoorClosed = false;
     }
 
     start(){
         console.log('game started');
         for(let i in this.ai){
             this.ai[i].kill = this.kill;
-            this.ai[i].attackCon = this.ai[i].attack == 'd' ? this.checkDoor : this.checkEmergency;
             this.ai[i].run(2);
+            switch(this.ai[i].attack){
+                case 'ld':
+                    this.ai[i].attackCon = this.checkLeftDoor.bind(this);
+                    break;
+                case 'rd':
+                    this.ai[i].attackCon = this.checkRightDoor.bind(this);
+                    break;
+                case 'vn':
+                    this.ai[i].attackCon = this.checkEmergency.bind(this);
+                    break;
+            }
         }
-        console.log(this.ai);
+        document.getElementById('leftDoor').addEventListener('click', this.toggleLeftDoor.bind(this));
+        document.getElementById('rightDoor').addEventListener('click', this.toggleRightDoor.bind(this));
     }
 
     kill(){
@@ -101,8 +134,12 @@ class Game {
         return this.emergencySounding;
     }
 
-    checkDoor(){
-        return this.doorClosed;
+    checkLeftDoor(){
+        return this.leftDoorClosed;
+    }
+
+    checkRightDoor(){
+        return this.righDoorClosed;
     }
 
     toggleEmergencyMeeting(){
@@ -112,15 +149,19 @@ class Game {
         }
     }
 
-    toggleDoor(){
-        this.doorClosed = !this.doorClosed;
+    toggleLeftDoor(){
+        this.leftDoorClosed = !this.leftDoorClosed;
+    }
+
+    toggleRightDoor(){
+        this.rightDoorClosed = !this.rightDoorClosed;
     }
 }
 
 /* Utility Functions */
 
 function startGame(){
-    const game = new Game([timmy]);
+    const game = new Game([timmy, rock]);
     game.start();
     document.getElementById('killGame').addEventListener('click', game.kill.bind(game));
 }
@@ -129,7 +170,7 @@ function generateDelay(level){
     if(level == 0){
         return 100000000000000;
     }
-    let time = Math.ceil(((Math.random())*10)/level) * 1000;
+    let time = Math.ceil(((Math.random())*10)/level) * 500;
     return time;
 }
 
@@ -140,12 +181,19 @@ document.getElementById('start').addEventListener('click', startGame);
 let nodeStrings = [
     [
         "timmy",
-        {id: 'tspr',type: 's',position: 'tpr',adjacent: ['tih1'],image: 'timmy.png'},
-        {id: 'tih1',type: 'i',position: 'th1',adjacent: ['tih2', 'tisr'] ,image: 'timmy.png'},
-        {id: 'tih2',type: 'i',position: 'th2',adjacent: ['tao', 'tisr'],image: 'timmy.png'},
-        {id: 'tisr',type: 'i',position: 'tsr',adjacent: ['tih2'],image: 'timmy.png'},
-        {id: 'tao',type: 'a',position: 'to',adjacent: [],image: 'timmy.png'}
-    ]
+        {id: 'tspr',type: 's',position: 'tpr',adjacent: [{nodeId: 'tih1',weight: 1}],image: 'timmy.png'},
+        {id: 'tih1',type: 'i',position: 'th1',adjacent: [{nodeId: 'tih2',weight: 0.7}, {nodeId: 'tisr',weight: 0.2}, {nodeId: 'tspr',weight: 0.1}],image: 'timmy.png'},
+        {id: 'tih2',type: 'i',position: 'th2',adjacent: [{nodeId: 'tald',weight: 0.5}, {nodeId: 'tisr',weight: 0.4}, {nodeId: 'tih1',weight: 0.1}],image: 'timmy.png'},
+        {id: 'tisr',type: 'i',position: 'tsr',adjacent: [{nodeId: 'tih2',weight: 0.4}],image: 'timmy.png'},
+        {id: 'tald',type: 'a',position: 'tld',adjacent: [],image: 'timmy.png'}
+    ],
+    [
+        "rock",
+        { id: 'rspr', type: 's', position: 'rpr', adjacent: [{ nodeId: 'rih1', weight: 1 }], image: 'rock.png' },
+        { id: 'rih1', type: 'i', position: 'rh1', adjacent: [{ nodeId: 'rih2', weight: 0.75 }, {nodeId: 'rspr', weight: 0.25}], image: 'rock.png' },
+        { id: 'rih2', type: 'i', position: 'rh2', adjacent: [{ nodeId: 'rard', weight: 1 }], image: 'rock.png' },
+        { id: 'rard', type: 'a', position: 'rrd', adjacent: [], image: 'rock.png' }
+    ]   
 ];
 
 let nodeList = [];
@@ -159,4 +207,5 @@ for(let i in nodeStrings){
     nodeList.push(nodeSet);
 }
 
-let timmy = new Ai('timmy', nodeList[0], 'd');
+let timmy = new Ai('timmy', nodeList[0], 'ld');
+let rock = new Ai('rock', nodeList[1], 'rd')
